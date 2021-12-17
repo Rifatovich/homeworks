@@ -1,0 +1,20 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int N;
+    cin >> N;
+    int result = 0;
+    int sum;
+    int c = 1;
+    while ((N - c) >= 3) {
+        sum = N - c;
+        for (int i = 1; i < sum; i++) {
+            if (i % 2 == 0 and (sum - i) % 2 == 1) {
+                result++;
+            }
+        }
+        c++;
+    }
+    cout << result << endl;
+}

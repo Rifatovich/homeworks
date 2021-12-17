@@ -1,0 +1,42 @@
+#include<cmath>
+#include <iostream>
+
+#define PI 3.14159265
+
+using namespace std;
+
+unsigned int sin_ot_n (float x, int n)  //вводим функцию 
+ 
+{
+
+float result;
+
+std::cout << sin(x + PI*n / 2) << std::endl;
+
+return result;
+
+}
+
+
+ 
+int main () 
+ 
+{
+
+int n;
+
+float result, x;
+
+std::cout << "От какого числа синус?" << std::endl; // не очень понял, что с иксом
+
+std::cin >> x;
+
+std::cout << "Порядок производной?" << std::endl; 
+
+std::cin >> n;
+
+std::cout <<"Производная косинуса n-ного порядка равна "<< sin_ot_n(x,n) << std::endl; //вывод результата
+
+return 0;
+ 
+}

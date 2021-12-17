@@ -1,0 +1,34 @@
+#include <iostream>
+#include<cmath>
+using namespace std;
+
+ 
+unsigned int SetBit (unsigned int a1, unsigned int a2)  //вводим функцию 
+ 
+{
+    
+int result = 0;	
+
+a2 = pow(2,a2); //возводим 2 в степень позиции бита
+
+result = (a1|a2); //с помощью побитового или установливаем в i-тый бит единицу
+  
+return result;
+
+}
+
+
+ 
+int 
+main () 
+ 
+{
+    
+unsigned int x, i;
+
+std::cin >> x >> i; //вводим число и номер бита
+
+cout << SetBit (x, i) << endl; //вывод результата 
+ 
+return 0;
+ 

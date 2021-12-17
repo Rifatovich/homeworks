@@ -1,0 +1,30 @@
+#include <iostream>
+
+using namespace std;
+
+int prostoe (int n){ //функция для определения простого числа
+    for(int i = 2; i <= n/2; i++) 
+        if((n % i ) == 0) 
+            return 0;
+return 1;
+}
+
+int main()
+{
+int N, a, i, d;
+std::cin>>N; //задаём кол-во тестов
+for(i = 1; i <= N; i++) {   
+    std::cin >> a;
+    if (prostoe(a)) {
+        std::cout << "Число простое, нет нетривиальных делителей" << std::endl;
+    }
+    else {
+        d = a;
+        std::cout << d << std::endl; //если число составное, то d - само число
+    }
+
+}
+return 0;
+}
+
+

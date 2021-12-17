@@ -1,0 +1,214 @@
+#include <iostream>
+
+using namespace std;
+
+struct node{
+	node* left;
+	node* right;
+	int key;
+	int value;
+	node() {
+		key = NULL;
+		value = NULL;
+		left = NULL;
+		right = NULL;
+	}
+};
+
+int max(int a, int b) {
+	return a > b ? a : b;
+}
+
+struct tree {
+	node* root;
+	tree() {
+		root = NULL;
+	}
+
+	int height(node* temp)
+	{
+		int h = 0;
+		if (temp != NULL)
+		{
+			int l_height = height(temp->left);
+			int r_height = height(temp->right);
+			int max_height = max(l_height, r_height);
+			h = max_height + 1;
+		}
+		return h;
+	}
+	int diff(node* temp)
+	{
+		int l_height = height(temp->left);
+		int r_height = height(temp->right);
+		int b_factor = l_height - r_height;
+		return b_factor;
+	}
+
+	node* rotation1(node* parent)
+	{
+		node* temp;
+		temp = parent->right;
+		parent->right = temp->left;
+		temp->left = parent;
+		return temp;
+	}
+	
+	node* rotation2(node* parent)
+	{
+		node* temp;
+		temp = parent->left;
+		parent->left = temp->right;
+		temp->right = parent;
+		return temp;
+	}
+
+	node* rotation3(node* parent)
+	{
+		node* temp;
+		temp = parent->left;
+		parent->left = rotation1(temp);
+		return rotation2(parent);
+	}
+
+	node* rotation4(node* parent)
+	{
+		node* temp;
+		temp = parent->right;
+		parent->right = rotation2(temp);
+		return rotation1(parent);
+	}
+
+	node* balance(node* temp)
+	{
+		int bal_factor = diff(temp);
+		if (bal_factor > 1)
+		{
+			if (diff(temp->left) > 0)
+				temp = rotation2(temp);
+			else
+				temp = rotation3(temp);
+		}
+		else if (bal_factor < -1)
+		{
+			if (diff(temp->right) > 0)
+				temp = rotation4(temp);
+			else
+				temp = rotation1(temp);
+		}
+		return temp;
+	}
+	void insert(int key, int value) {
+		insert0(root, key, value);
+	}
+
+	node* insert0(node*& root, int key, int value)
+	{
+		if (root == NULL)
+		{
+			root = new node;
+			root->key = key;
+			root->value = value;
+			root->left = NULL;
+			root->right = NULL;
+			return root;
+		}
+		else if (key < root->key)
+		{
+			root->left = insert0(root->left, key, value);
+			root = balance(root);
+		}
+		else if (key >= root->key)
+		{
+			root->right = insert0(root->right, key, value);
+			root = balance(root);
+		}
+		return root;
+	}
+
+	int size() {
+	return size(root);
+	}
+	int size(node* a) {
+int s = 0;
+if (a != NULL) {
+s = 1;
+s += size(a->left);
+s += size(a->right);
+}
+return s;
+}
+
+	void inorder() {
+		inorder0(root);
+	}
+
+	void inorder0(node* t)
+	{
+		if (t == NULL)
+			return;
+		inorder0(t->left);
+		cout << "(" << t->key << "  " << t->value <<")" <<std::endl;
+		inorder0(t->right);
+	}
+	
+	node* findMin(node* t) {
+		if (t == NULL) return NULL;
+		else if (t->left == NULL) return t; 
+		else return findMin(t->left); 
+	}
+	
+	void remove(int a) {
+		remove0(root, a);
+	}
+
+	node* remove0(node* a, int b) {
+		node* temp;
+		if (a == NULL) 
+		{
+			return NULL;
+		}
+		
+		else if (b < a->key)
+		{
+			a->left = remove0(a->left, b);
+		}
+		else if (b > a->key) {
+			a->right = remove0(a->right, b);
+		}
+
+		//2 потомка
+		else if (a->left && a->right) {
+			temp = findMin(a->right);
+			a->key = temp->key;
+			a->right = remove0(a->right, a->key);
+		}
+		// 1 или 0
+		else {
+			temp = a;
+			if (a->left == NULL) a = a->right;
+			else if (a->right == NULL) a = a->left;
+			delete temp;
+		}
+		if (a == NULL) {
+			return a;
+		}
+		//проверка баланса
+		a = balance(a);
+	}
+};
+
+
+int main()
+{
+	tree tree;
+	tree.insert(1, 10);
+	tree.insert(10, 135);
+	tree.insert(14, 354);
+	tree.insert(156, 36);
+	tree.insert(41, 46);
+
+	tree.inorder();
+
+	tree.remove(41);
+}

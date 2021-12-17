@@ -1,0 +1,50 @@
+/*Бинарный поиск числа n для упорядоченного массива*/
+
+#include <iostream>
+using namespace std;
+
+int main()
+{
+	const int t = 10; 
+	const int k = 99;
+	int mas[t];
+	int n;
+	cout << "Vvedite n" << endl;
+	cin >> n;
+	for (int i = 0; i < t; i++) { //Задаём массив
+		mas[i] = rand() % k;
+		cout << mas[i] << " ";
+	}
+
+	for (int i = 0; i < t; i++) {  //Сортировка
+		for (int j = 0; j < t - i - 1; j++) {
+			if (mas[j] > mas[j + 1]) {
+				swap(mas[j], mas[j + 1]);
+			}
+		}
+	}
+
+	cout << endl;
+
+	for (int i = 0; i < t; i++) { 
+		cout << mas[i] << " ";
+	}
+
+	bool flag = false;
+	int left = 0;
+	int right = t - 1;
+	int center;
+
+	while ((left <= right) && (flag != true)) { //Поиск
+		center = (left + right) / 2;
+		if (mas[center] == n) flag = true;
+		if (mas[center] > n) right = center - 1;
+		else left = center + 1;
+	}
+
+	cout << endl;
+	if (flag) cout << center << endl;
+	else cout << "-1" << endl;
+
+	return 0;
+}

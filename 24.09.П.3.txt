@@ -1,0 +1,32 @@
+#include <iostream>
+using namespace std;
+
+ 
+unsigned int Obnulenie_Bita (unsigned int a1, unsigned int a2)  //вводим функцию 
+ 
+{
+    
+int result = 0;	
+
+result = a1 & (~(1<<a2)); //обнуляем i-тый бит 
+  
+return result;
+
+}
+
+
+ 
+int 
+main () 
+ 
+{
+    
+unsigned int x, i;
+
+std::cin >> x >> i; //вводим число и номер бита
+
+cout << Obnulenie_Bita (x, i) << endl; //вывод результата 
+ 
+return 0;
+ 
+}

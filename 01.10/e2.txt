@@ -1,0 +1,23 @@
+#include <iostream>
+#include<cmath>
+using namespace std;
+
+int main()
+{
+int N,i;
+double h,h1,b,s,a;
+    std::cin>>N; //задаём кол-во тестов
+    for(i = 1; i <= N; i++) { 
+          std::cin >>a>>s;
+          h = (2*s)/a; //считаем высоту к основанию
+          b = sqrt(abs((pow(a/2,2))+(pow(h,2)))); //считаем длину боковой стороны
+          h1 = (2*s)/b; //считаем длину высоты к боковой стороне
+          if (h1>h) {
+           std::cout << h << std::endl;  //выводим на экран наименьшую из высот
+          }
+          else {
+             std::cout << h1 << std::endl;
+          }
+    }
+    return 0;
+}

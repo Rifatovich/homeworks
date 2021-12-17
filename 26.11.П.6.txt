@@ -1,0 +1,49 @@
+//Краскал
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+struct gr {
+	int t, g;
+	gr() {}
+	gr(int x, int y) {
+		t = x;
+		g = y;
+	}
+};
+int main() {
+	int n, m;
+	cin >> n >> m;
+	vector <gr> graph(m);
+	vector <gr> tree;
+	vector <int> var(n);
+	for (int i = 0; i < n; i++) {
+		var[i] = i;
+	}
+	for (int i = 0; i < m; i++) {
+		int x, y;
+		cin >> x >> y;
+		graph[i].t = x;
+		graph[i].g = y;
+	}
+	for (int i = 0; i < m; i++) {
+		int x = graph[i].t;
+		int y = graph[i].g;
+		if (var[x] != var[y]) {
+			tree.push_back(graph[i]);
+			int old_var = var[y];
+			int new_var = var[x];
+			for (int j = 0; j < n; j++) {
+				if (var[j] == old_var) {
+					var[j] = new_var;
+				}
+			}
+		}
+	}
+	for (int i = 0; i < n - 1; i++) {
+		cout << tree[i].t << " " << tree[i].g;
+		if (i != n - 2) cout << endl;
+	}
+	return 0;
+}

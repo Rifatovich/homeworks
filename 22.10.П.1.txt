@@ -1,0 +1,37 @@
+//Фибоначчи по-разному
+#include <iostream>
+
+int rec(const int i) {
+	if (i == 1) {
+		return 0;
+	}
+	else if (i == 2) {
+		return 1;
+	}
+	return rec(i - 1) + rec(i - 2);
+}
+
+int without_rec(const int n) {
+	int x = 0;
+	int y = 1;
+	int z = 1;
+	for (int i = 1; i < n; ++i) {
+		x = y;
+		y = z;
+		z = x + y;
+	}
+	return x;
+}
+
+int main() {
+	int cn;
+	std::cin >> cn;
+
+	std::cout << "Num " << cn << " is " << rec(cn) << std::endl;
+
+
+	cn = 0;
+	std::cin >> cn;
+	std::cout << "Num " << cn << " is " << without_rec(cn) << std::endl;
+
+}

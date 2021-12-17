@@ -1,0 +1,45 @@
+#include <iostream>
+
+using namespace std;
+
+ 
+unsigned int umnozhenie (unsigned int a1, unsigned int a2)  //вводим функцию 
+ 
+{
+    
+int result = 0;		
+ 
+//пока второй множитель больше нуля
+while (a2 > 0) 
+    
+{
+ 
+    if (a2 & 1 == 1) //если второй множитель нечётный (последний бит - 1)
+        result = result + a1; //прибавляем к результату первый множитель
+      
+ 
+    a1 = a1 << 1; //умножаем на 2 a1
+    a2 = a2 >> 1; //делим a2 на 2
+    
+}
+  
+return result;
+
+}
+
+
+ 
+int 
+main () 
+ 
+{
+    
+unsigned int first, second;
+
+std::cin >> first >> second; //вводим множители 
+
+cout << umnozhenie (first, second) << endl; //вывод результата 
+ 
+return 0;
+ 
+}

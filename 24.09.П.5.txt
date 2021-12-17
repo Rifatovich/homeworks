@@ -1,0 +1,42 @@
+
+#include <iostream>
+
+using namespace std;
+
+ unsigned int poezd (unsigned int t, unsigned int v)  //вводим функцию 
+ 
+{
+
+unsigned int s1;
+
+float s, s2;
+    
+
+s1 = v*t; // формула пути для равномерного движения
+
+s2 = (v*t)/2; // формула пути для равноускоренного движения без ускорения
+s = s1 + s2;
+
+std::cout << "s1 = " << s1 << std::endl;
+std::cout << "s2 = " << s2 << std::endl;
+std::cout << "s = " << s << std::endl;
+  
+return 0;
+}
+
+
+ 
+int 
+main () 
+ 
+{
+    
+unsigned int t, v;
+
+std::cin >> t >> v;
+
+std::cout << poezd(t,v) << std::endl;
+ 
+return 0;
+ 
+}

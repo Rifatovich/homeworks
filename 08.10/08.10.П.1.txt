@@ -1,0 +1,84 @@
+/*Отсортировать массив и найти его основные статистические характеристики*/
+
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+int main()
+{
+	const int n = 6; // задаём массив из n элементов и заполняем его числами от 0 до k
+	const int k = 99;
+	int mas[n];
+	for (int i = 0; i < n; i++) {
+		mas[i] = rand() % k;
+		cout << mas[i] << " ";
+	}
+
+	for (int i = 0; i < n; i++) { //сортируем по возрастанию
+		for (int j = 0; j < n - i - 1; j++) {
+			if (mas[j] > mas[j + 1]) {
+				swap(mas[j], mas[j + 1]);
+			}
+		}
+	}
+
+	cout << endl;
+
+	double sr = 0;
+	for (int i = 0; i < n; i++) { //Вывод отсортированного массива
+		cout << mas[i] << " ";
+		sr = sr + mas[i];
+	}
+
+	double q = 0;
+	double disp = 0;
+	double u;
+	for (int i = 0; i < n; i++) { //цикл для определения дисперсии
+		u = mas[i];
+		q = pow((u - (sr / n)), 2);
+		q = (q / (n - 1));
+		disp = disp + q;
+	}
+
+	int t = 1;
+	int h = 0;
+	int p, r;
+	for (int i = 0; i < n - 1; i++) { // Цикл для определения моды
+		if (mas[i] == mas[i + 1]) {
+			t += 1;
+			if (t > h) {
+				h = t;
+				r = mas[i];
+			}
+		}
+		else {
+
+			t = 1;
+		}
+	}
+
+	cout << endl;
+
+	cout << "Minimum = " << mas[0] << endl;
+
+	cout << "Maximum = " << mas[n - 1] << endl;
+
+	cout << "Razmah = " << mas[1] - mas[0] << endl;
+
+	cout << "Srednee znachenie = " << sr / n << endl;
+
+	if (n % 2 == 0) {
+		cout << "Mediani = " << mas[n / 2 - 1] << " and " << mas[n / 2] << endl;
+	}
+	if (n % 2 == 1) {
+		cout << "mediana = " << mas[n / 2] << endl;
+	}
+
+	if (h > 1) cout << "Moda = " << r << endl;
+
+	if (h <= 1) cout << "Moda otsutstvuet - vse elementi po razy (smotri mediany)" << endl;
+
+	cout << "Dispersiya = " << disp << endl;
+
+	return 0;
+}

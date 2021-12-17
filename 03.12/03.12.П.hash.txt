@@ -1,0 +1,35 @@
+#include <vector>
+#include <iostream>
+using namespace std;
+struct map{
+    int key;
+    string value;
+    map* reb1 = nullptr;
+    map* reb2 = nullptr;
+    map* rod = nullptr;
+    map(int key, string value) : key(key), value(value) {}
+};
+void findkey(map *& curr, int find, map*& rod){
+    while(curr != nullptr && curr -> key != find){
+        rod = curr;
+        if(find < curr -> key){
+            curr = curr -> reb1;
+        } else {
+            curr = curr -> reb2;
+        }
+    }
+}
+map* vstavka(map* ht, int index, string val){
+    if(!ht){
+        return new map(index, val);
+    }
+    if(index < ht -> key){
+        return vstavka(ht -> reb1, index, val);
+    } else {
+        return vstavka(ht -> reb2, index, val);
+    }
+}
+
+int main() {
+    return 0;
+}

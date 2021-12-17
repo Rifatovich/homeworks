@@ -1,0 +1,81 @@
+#include <iostream>
+using namespace std;
+
+ 
+    unsigned int chetnost (unsigned int a1)  //вводим функцию 
+ 
+{
+    
+int result = 0;	
+
+if (a1 & 1 == 1) { //если первый бит числа = 1 , число нечётное
+    result = 1;
+} 
+else {
+    result = 0;
+}
+  
+return result;
+
+}
+
+    unsigned int swap (unsigned int a1, unsigned int a2)  //вводим функцию 
+ 
+{
+    
+
+a1 ^= a2;
+
+a2 ^= a1;
+
+a1 ^= a2;
+
+std::cout << "a1 = "<< a1 << ", a2 = "<< a2 << std::endl;
+
+return 0;
+
+}
+
+    unsigned int umnozh_na_8 (unsigned int a1)  //вводим функцию 
+ 
+{
+    
+int result = 0;	
+
+result = (a1 << 3); //смещаем на три бита влево
+  
+return result;
+
+}
+
+
+ 
+int 
+main () 
+ 
+{
+    
+unsigned int x, a1, a2, y;
+ 
+std::cout << "Введите число для определения чётности" << std::endl; 
+  
+std::cin >> x; 
+
+cout <<"Остаток от деления на 2 = "<<chetnost (x) << endl; //вывод результата 
+
+std::cout << "Введите числа для перемены значений местами" << std::endl; 
+  
+std::cin >> a1 >> a2; 
+
+cout <<swap (a1, a2) << endl; //вывод результата 
+
+std::cout << "Введите число для умножения на 8" << std::endl; 
+  
+std::cin >> y; 
+
+cout <<umnozh_na_8 (y) << endl; //вывод результата 
+
+ 
+return 0;
+ 
+}
